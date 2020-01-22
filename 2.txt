@@ -1,0 +1,21 @@
+CREATE OR REPLACE PROCEDURE FIR_CH IS
+   CURSOR CREPORT IS SELECT F.FIRNO,FIRDATE
+FROM FIR F 
+WHERE NOT EXISTS (SELECT * 
+                    FROM CHARGESHEET C 
+                    WHERE C.FIRNO=F.FIRNO)
+ ;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('****************************');
+DBMS_OUTPUT.PUT_LINE('FIRNO  |  FIR DATE ');
+DBMS_OUTPUT.PUT_LINE('­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­');
+FOR CREC IN CREPORT
+LOOP
+DBMS_OUTPUT.PUT_LINE(CREC.FIRNO||' | '||CREC.FIRDATE);
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('**************');
+END;
+
+----------------------------
+EXECUTE FIR_CH;
+----------------------------

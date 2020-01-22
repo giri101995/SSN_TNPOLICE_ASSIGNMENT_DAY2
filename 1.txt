@@ -1,0 +1,19 @@
+********************************1A********************************
+SELECT COUNT(*) FROM(SELECT  CRNAME,COUNT(*)
+FROM CHARGESHEET A, CRIMINAL C
+WHERE CRNAME=ACCUSNAME
+GROUP BY CRNAME);
+
+********************************1B********************************
+SELECT ACCUSNAME,COUNT(*)
+FROM CHARGESHEET A, CRIMINAL C
+WHERE ACCUSNAME=CRNAME
+GROUP BY ACCUSNAME
+HAVING COUNT(*)>5;
+
+********************************1C********************************
+SELECT ACT 
+FROM FIR GROUP BY ACT
+HAVING COUNT(*)=(SELECT MAX(COUNT(*))
+		FROM FIR
+		GROUP BY ACT);
